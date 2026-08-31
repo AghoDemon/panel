@@ -31,26 +31,21 @@ class ServerTransformer extends BaseClientTransformer
      */
     public function transform(Server $server): array
     {
-        /** @var StartupCommandService $service */
+        /** @var \Pterodactyl\Services\Servers\StartupCommandService $service */
         $service = Container::getInstance()->make(StartupCommandService::class);
 
         $user = $this->request->user();
 
         return [
             'server_owner' => $user->id === $server->owner_id,
-            'identifier' => config('pterodactyl.features.new_server_identifiers')
-                ? $server->identifier
-                : $server->uuidShort,
-            '__deprecated_uuid_short' => $server->uuidShort,
-            // In Pterodactyl 2.0 we'll be replacing `identifier` above with the actual
-            // "identifier" used internally. This is a completely different value compared
-            // to the current however, and would be quite a breaking change to URLs.
-            'server_identifier' => $server->identifier,
+            'identifier' => $server->uuidShort,
             'internal_id' => $server->id,
             'uuid' => $server->uuid,
             'name' => $server->name,
             'node' => $server->node->name,
             'is_node_under_maintenance' => $server->node->isUnderMaintenance(),
+            'nest_id' => $server->nest_id,
+            'egg_id' => $server->egg_id,
             'sftp_details' => [
                 'ip' => $server->node->fqdn,
                 'port' => $server->node->daemonSFTP,
@@ -79,12 +74,13 @@ class ServerTransformer extends BaseClientTransformer
             // This field is deprecated, please use "status".
             'is_installing' => !$server->isInstalled(),
             'is_transferring' => !is_null($server->transfer),
-            'skip_scripts' => $server->skip_scripts,
         ];
     }
 
     /**
      * Returns the allocations associated with this server.
+     *
+     * @return \League\Fractal\Resource\Collection
      *
      * @throws \Pterodactyl\Exceptions\Transformer\InvalidTransformerLevelException
      */
@@ -111,6 +107,8 @@ class ServerTransformer extends BaseClientTransformer
     }
 
     /**
+     * @return \League\Fractal\Resource\Collection|\League\Fractal\Resource\NullResource
+     *
      * @throws \Pterodactyl\Exceptions\Transformer\InvalidTransformerLevelException
      */
     public function includeVariables(Server $server): Collection|NullResource
@@ -129,6 +127,8 @@ class ServerTransformer extends BaseClientTransformer
     /**
      * Returns the egg associated with this server.
      *
+     * @return \League\Fractal\Resource\Item
+     *
      * @throws \Pterodactyl\Exceptions\Transformer\InvalidTransformerLevelException
      */
     public function includeEgg(Server $server): Item
@@ -138,6 +138,8 @@ class ServerTransformer extends BaseClientTransformer
 
     /**
      * Returns the subusers associated with this server.
+     *
+     * @return \League\Fractal\Resource\Collection|\League\Fractal\Resource\NullResource
      *
      * @throws \Pterodactyl\Exceptions\Transformer\InvalidTransformerLevelException
      */
