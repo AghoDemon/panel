@@ -1,0 +1,69 @@
+/* Easily change the colors of this theme, please use the correct hex and run "yarn build:production" in order to see your changes. */
+
+
+/* Edit the darkmodus colors of this theme, the name indicates which part you are editting so you do not get lost. */
+.darkmode{
+    --highlight-color:#f5f6f8; /* Most light Text color */
+    --light-color:#ecf0f3; /* Light Text color */
+    --color:#ced7e0; /* Default Text color */
+    --sub-color:#a2b2c2; /* Sub Text color */
+    --color-4:#7c8a99; /* 5th Text color */
+    --color-5:#748291; /* 6th Text color */
+    --color-6:#636f7d; /* Darkest Text color */
+    --dark:#33383d; /* Darkest color */
+
+    --background-color:#14141C; /* BackgroundColor of the page */
+    --login-background:#14141C; /* BackgroundColor of the login page */
+    
+    --input:#2d2d41; /* BackgroundColor of the input fields */
+    --input-border:#2d2d41; /* BorderColor of the input fields */
+
+    --secondary-hover:#252536; /* Secondary Hover Color (lighter than secondary) */
+    --primary-hover:#8652ff; /* Primary Hover Color (lighter than primary) */
+    
+    --secondary:#1C1C29; /* Secondary Color (for most of the boxxes) */
+    --primary:#723fe7; /* Primary Color */
+    --borders:#434363; /* Color of most of the borders */
+
+    --black:#000000; /* Black (dont touch) */
+    --white:#fff; /* White (dont touch) */
+
+    --console:#15151f; /* BackgroundColor of the console */
+    --console-input:#1C1C29; /* backrgoundColor of the console input field */
+}
+
+
+/* Edit the lightmodus colors of this theme, the name indicates which part you are editting so you do not get lost */
+:root{
+    --highlight-color:#0f0f0f; /* Most Darkest Text color */
+    --light-color:#1d1e1f; /* Dark Text color */
+    --color:#1c1d1f; /* Default Text color */
+    --sub-color:#26282b; /* Sub Text color */
+    --color-4:#33373b; /* 5th Text color */
+    --color-5:#505a64; /* 6th Text color */
+    --color-6:#636f7d; /* Lightest Text color */
+    --dark:#d0dde9; /* Lightest color */
+
+    --background-color:#ececf1;  /* BackgroundColor of the page */
+    --login-background:white; /* BackgroundColor of the login page */
+    
+    --input:#d9d9f7; /* BackgroundColor of the input fields */
+    --input-border:#dbdbf8; /* BorderColor of the input fields */
+
+    --secondary-hover:#e9e9ee; /* Secondary Hover Color (lighter than secondary) */
+    --primary-hover:#8652ff; /* Primary Hover Color (lighter than primary) */
+    
+    --secondary:#ffffff; /* Secondary Color (for most of the boxxes) */
+    --primary:#723fe7; /* Primary Color */
+    --borders:#cfcff5; /* Color of most of the borders */
+
+    --black:#ffffff; /* White (dont touch) */
+    --white:#000000; /* Black (dont touch) */
+
+
+    --console:#15151f; /* BackgroundColor of the console */
+    --console-input:#1C1C29; /* backrgoundColor of the console input field */
+}
+
+
+/* This theme is made by Techno1Monkey#1424. Thanks for purchasing and enjoy! */

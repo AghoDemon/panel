@@ -15,11 +15,29 @@ import SubNavigation from '@/components/elements/SubNavigation';
 import InstallListener from '@/components/server/InstallListener';
 import ErrorBoundary from '@/components/elements/ErrorBoundary';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons';
+import { faCogs, faHome, faUserCircle, faTerminal, faFolder, faDatabase, faCalendar, faUsers, faArchive, faNetworkWired, faPlayCircle, faExternalLinkAlt, faEye } from '@fortawesome/free-solid-svg-icons';
+import LogoutBtn from '@/components/elements/LogoutBtn';
 import { useLocation } from 'react-router';
 import ConflictStateRenderer from '@/components/server/ConflictStateRenderer';
 import PermissionRoute from '@/components/elements/PermissionRoute';
 import routes from '@/routers/routes';
+import styled from 'styled-components/macro';
+import { Navigation, ComponentLoader } from '@/routers/RouterElements';
+
+const FlexContainer = styled.div`
+    & {
+        display:flex;
+        width:100%;
+    }
+    @media (max-width:694px){
+        display:block;
+    }
+`;
+const ContentBase = styled.div`
+    & {
+        width:100%;
+    }
+`;
 
 export default () => {
     const match = useRouteMatch<{ id: string }>();
@@ -64,65 +82,62 @@ export default () => {
 
     return (
         <React.Fragment key={'server-router'}>
-            <NavigationBar />
-            {!uuid || !id ? (
-                error ? (
-                    <ServerError message={error} />
-                ) : (
-                    <Spinner size={'large'} centered />
-                )
-            ) : (
-                <>
-                    <CSSTransition timeout={150} classNames={'fade'} appear in>
-                        <SubNavigation>
-                            <div>
-                                {routes.server
-                                    .filter((route) => !!route.name)
-                                    .map((route) =>
-                                        route.permission ? (
-                                            <Can key={route.path} action={route.permission} matchAny>
-                                                <NavLink to={to(route.path, true)} exact={route.exact}>
-                                                    {route.name}
-                                                </NavLink>
-                                            </Can>
-                                        ) : (
-                                            <NavLink key={route.path} to={to(route.path, true)} exact={route.exact}>
-                                                {route.name}
-                                            </NavLink>
-                                        )
-                                    )}
-                                {rootAdmin && (
-                                    // eslint-disable-next-line react/jsx-no-target-blank
-                                    <a href={`/admin/servers/view/${serverId}`} target={'_blank'}>
-                                        <FontAwesomeIcon icon={faExternalLinkAlt} />
-                                    </a>
-                                )}
-                            </div>
-                        </SubNavigation>
-                    </CSSTransition>
-                    <InstallListener />
-                    <TransferListener />
-                    <WebsocketHandler />
-                    {inConflictState && (!rootAdmin || (rootAdmin && !location.pathname.endsWith(`/server/${id}`))) ? (
-                        <ConflictStateRenderer />
+            <FlexContainer>
+                {!uuid || !id ? (
+                    error ? (
+                        <ServerError message={error} />
                     ) : (
-                        <ErrorBoundary>
-                            <TransitionRouter>
-                                <Switch location={location}>
-                                    {routes.server.map(({ path, permission, component: Component }) => (
-                                        <PermissionRoute key={path} permission={permission} path={to(path)} exact>
-                                            <Spinner.Suspense>
-                                                <Component />
-                                            </Spinner.Suspense>
-                                        </PermissionRoute>
-                                    ))}
-                                    <Route path={'*'} component={NotFound} />
-                                </Switch>
-                            </TransitionRouter>
-                        </ErrorBoundary>
-                    )}
-                </>
-            )}
+                        <Spinner size={'large'} centered />
+                    )
+                ) : (
+                    <>
+                        <CSSTransition timeout={150} classNames={'fade'} appear in>
+                        <SubNavigation>
+                                <div>
+                                    <NavLink to={'/'} exact>
+                                        <FontAwesomeIcon icon={faHome}/>
+                                        <span>Home</span>
+                                    </NavLink>
+                                    <NavLink to={'/account'} className='ignore'>
+                                        <FontAwesomeIcon icon={faUserCircle}/>
+                                            <span>Account</span>
+                                    </NavLink>
+                                </div>
+                                <div>
+                                    <Navigation />
+                                    {rootAdmin && (
+                                        // eslint-disable-next-line react/jsx-no-target-blank
+                                        <a href={`/admin/servers/view/${serverId}`} target={'_blank'}>
+                                            <FontAwesomeIcon icon={faExternalLinkAlt} /> <span>Admin view</span>
+                                        </a>
+                                    )}
+                                </div>
+                                <div className='subNavBottom'>
+                                    <LogoutBtn/>
+                                </div>
+                        </SubNavigation>
+                        </CSSTransition>
+                        <ContentBase> 
+                            <NavigationBar />
+                            <InstallListener />
+                            <TransferListener />
+                            <WebsocketHandler />
+                            {inConflictState && (!rootAdmin || (rootAdmin && !location.pathname.endsWith(`/server/${id}`))) ? (
+                                <ConflictStateRenderer />
+                            ) : (
+                                <ErrorBoundary>
+                                    <TransitionRouter>
+                                        <Switch location={location}>
+                                            <ComponentLoader />
+                                            <Route path={'*'} component={NotFound} />
+                                        </Switch>
+                                    </TransitionRouter>
+                                </ErrorBoundary>
+                            )}
+                        </ContentBase>
+                    </>
+                )}
+            </FlexContainer>
         </React.Fragment>
     );
 };

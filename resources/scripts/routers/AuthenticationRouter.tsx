@@ -5,6 +5,7 @@ import ForgotPasswordContainer from '@/components/auth/ForgotPasswordContainer';
 import ResetPasswordContainer from '@/components/auth/ResetPasswordContainer';
 import LoginCheckpointContainer from '@/components/auth/LoginCheckpointContainer';
 import { NotFound } from '@/components/elements/ScreenBlock';
+import DarkModeToggler  from '@/components/elements/DarkModeToggler';
 import { useHistory, useLocation } from 'react-router';
 
 export default () => {
@@ -24,6 +25,7 @@ export default () => {
                     <NotFound onBack={() => history.push('/auth/login')} />
                 </Route>
             </Switch>
+            <DarkModeToggler />
         </div>
     );
 };
