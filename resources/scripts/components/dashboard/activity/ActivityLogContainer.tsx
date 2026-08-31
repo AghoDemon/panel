@@ -12,6 +12,14 @@ import classNames from 'classnames';
 import ActivityLogEntry from '@/components/elements/activity/ActivityLogEntry';
 import Tooltip from '@/components/elements/tooltip/Tooltip';
 import useLocationHash from '@/plugins/useLocationHash';
+import styled from 'styled-components/macro';
+
+const GreyBox = styled.div`
+    &{
+        background-color:var(--secondary);
+        border-radius:3px;
+    }
+`;
 
 export default () => {
     const { hash } = useLocationHash();
@@ -47,7 +55,7 @@ export default () => {
             {!data && isValidating ? (
                 <Spinner centered />
             ) : (
-                <div className={'bg-gray-700'}>
+                <GreyBox>
                     {data?.items.map((activity) => (
                         <ActivityLogEntry key={activity.id} activity={activity}>
                             {typeof activity.properties.useragent === 'string' && (
@@ -59,7 +67,7 @@ export default () => {
                             )}
                         </ActivityLogEntry>
                     ))}
-                </div>
+                </GreyBox>
             )}
             {data && (
                 <PaginationFooter

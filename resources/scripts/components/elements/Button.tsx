@@ -16,20 +16,23 @@ const ButtonStyle = styled.button<Omit<Props, 'isLoading'>>`
     ${(props) =>
         ((!props.isSecondary && !props.color) || props.color === 'primary') &&
         css<Props>`
-            ${(props) => !props.isSecondary && tw`bg-primary-500 border-primary-600 border text-primary-50`};
+            ${props => !props.isSecondary && tw`bg-primary-500 border text-primary-50`};
+            background-color:var(--primary);
+            border:var(--borders);
 
             &:hover:not(:disabled) {
-                ${tw`bg-primary-600 border-primary-700`};
+                background-color:var(--primary-hover);
             }
         `};
 
     ${(props) =>
         props.color === 'grey' &&
         css`
-            ${tw`border-neutral-600 bg-neutral-500 text-neutral-50`};
-
+            ${tw`text-neutral-50`};
+            background-color:var(--secondary);
+            
             &:hover:not(:disabled) {
-                ${tw`bg-neutral-600 border-neutral-700`};
+                background-color:var(--secondary-hover);
             }
         `};
 

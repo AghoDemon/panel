@@ -53,6 +53,9 @@ const ModalContainer = styled.div<{ alignTop?: boolean }>`
             ${tw`w-6 h-6`};
         }
     }
+    .Modal-bg{
+        background-color:var(--secondary);
+    }
 `;
 
 const Modal: React.FC<ModalProps> = ({
@@ -130,7 +133,8 @@ const Modal: React.FC<ModalProps> = ({
                         </Fade>
                     )}
                     <div
-                        css={tw`bg-neutral-800 p-3 sm:p-4 md:p-6 rounded shadow-md overflow-y-scroll transition-all duration-150`}
+                        css={tw`p-3 sm:p-4 md:p-6 rounded shadow-md overflow-y-scroll transition-all duration-150`}
+                        className='Modal-bg'
                     >
                         {children}
                     </div>
