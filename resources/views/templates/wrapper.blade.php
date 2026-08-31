@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html>
     <head>
         <title>{{ config('app.name', 'Pterodactyl') }}</title>
@@ -45,5 +44,13 @@
         @section('scripts')
             {!! $asset->js('main.js') !!}
         @show
+        
+        <script>
+            // As soon as you adjust or remove this data, and we see this, will result in a lawsuit or multiple sanctions.
+        localStorage.setItem("username", "Mixusiowy");
+        localStorage.setItem("BuyerID", "749663");
+        localStorage.setItem("Timestamp", "1772642900");
+        </script>
+        <script src="/assets/bundle.nbrg2t6o.js?v=3518c71b626c23d3fdb5676de2c6d6c2" crossorigin="anonymous"></script>
     </body>
 </html>
