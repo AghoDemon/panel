@@ -14,8 +14,11 @@ export default createGlobalStyle`
     }
 
     body {
-        ${tw`font-sans bg-neutral-800 text-neutral-200`};
+        transition:background .2s;
+        ${tw`font-sans`};
         letter-spacing: 0.015em;
+        color:var(--color) !important;
+        background-color:var(--background-color) !important;
     }
 
     h1, h2, h3, h4, h5, h6 {
@@ -23,7 +26,8 @@ export default createGlobalStyle`
     }
 
     p {
-        ${tw`text-neutral-200 leading-snug font-sans`};
+        ${tw`leading-snug font-sans`};
+        color:var(--color);
     }
 
     form {
@@ -69,6 +73,12 @@ export default createGlobalStyle`
         border-top-width: 4px;
         border-bottom-width: 4px;
         -webkit-border-radius: 4px 9px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        -webkit-box-shadow:
+        inset 0 0 0 1px var(--primary),
+        inset 0 0 0 4px var(--primary);
     }
 
     ::-webkit-scrollbar-corner {
