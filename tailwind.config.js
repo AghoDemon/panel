@@ -1,16 +1,29 @@
 const colors = require('tailwindcss/colors');
 
 const gray = {
-    50: 'hsl(216, 33%, 97%)',
-    100: 'hsl(214, 15%, 91%)',
-    200: 'hsl(210, 16%, 82%)',
-    300: 'hsl(211, 13%, 65%)',
-    400: 'hsl(211, 10%, 53%)',
-    500: 'hsl(211, 12%, 43%)',
-    600: 'hsl(209, 14%, 37%)',
-    700: 'hsl(209, 18%, 30%)',
-    800: 'hsl(209, 20%, 25%)',
-    900: 'hsl(210, 24%, 16%)',
+    50: 'var(--highlight-color)', // white text
+    100: 'var(--light-color)',
+    200: 'var(--color)', // normal text
+    300: 'var(--sub-color)',
+    400: 'var(--color-4)',
+    500: 'var(--color-5)',
+    600: 'var(--secondary-hover)',
+    700: 'var(--secondary)',
+    800: 'var(--dark)',
+    900: 'var(--dark)',
+};
+
+const neutral = {
+    50: 'var(--highlight-color)', // white text
+    100: 'var(--light-color)',
+    200: 'var(--color)', // normal text
+    300: 'var(--sub-color)',
+    400: 'var(--color-4)',
+    500: 'var(--color-5)',
+    600: 'var(--secondary-hover)',
+    700: 'var(--secondary)',
+    800: 'var(--dark)',
+    900: 'var(--dark)',
 };
 
 module.exports = {
@@ -28,7 +41,7 @@ module.exports = {
                 // in new code.
                 primary: colors.blue,
                 gray: gray,
-                neutral: gray,
+                neutral: neutral,
                 cyan: colors.cyan,
             },
             fontSize: {
