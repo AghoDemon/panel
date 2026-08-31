@@ -17,7 +17,7 @@ export default () => {
     const previous = useRef<Record<'tx' | 'rx', number>>({ tx: -1, rx: -1 });
 
     const cpu = useChartTickLabel('CPU', limits.cpu, '%', 2);
-    const memory = useChartTickLabel('Memory', limits.memory, 'MiB');
+    const memory = useChartTickLabel('Memory', limits.memory, 'MB');
     const network = useChart('Network', {
         sets: 2,
         options: {
@@ -56,6 +56,7 @@ export default () => {
         } catch (e) {
             return;
         }
+
         cpu.push(values.cpu_absolute);
         memory.push(Math.floor(values.memory_bytes / 1024 / 1024));
         network.push([

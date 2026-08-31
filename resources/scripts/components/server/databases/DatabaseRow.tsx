@@ -38,6 +38,7 @@ export default ({ database, className }: Props) => {
         database.password ? `:${encodeURIComponent(database.password)}` : ''
     }@${database.connectionString}/${database.name}`;
 
+
     const schema = object().shape({
         confirm: string()
             .required('The database name must be provided.')
@@ -72,7 +73,7 @@ export default ({ database, className }: Props) => {
                         }}
                     >
                         <FlashMessageRender byKey={'database:delete'} css={tw`mb-6`} />
-                        <h2 css={tw`text-2xl mb-6`}>Confirm database deletion</h2>
+                        <h2 css={tw`mb-6 text-2xl`}>Confirm database deletion</h2>
                         <p css={tw`text-sm`}>
                             Deleting a database is a permanent action, it cannot be undone. This will permanently delete
                             the <strong>{database.name}</strong> database and remove all associated data.
@@ -102,7 +103,7 @@ export default ({ database, className }: Props) => {
                 <h3 css={tw`mb-6 text-2xl`}>Database connection details</h3>
                 <div>
                     <Label>Endpoint</Label>
-                    <CopyOnClick text={database.connectionString}>
+                    <CopyOnClick text={database.connectionString} >
                         <Input type={'text'} readOnly value={database.connectionString} />
                     </CopyOnClick>
                 </div>
@@ -148,21 +149,21 @@ export default ({ database, className }: Props) => {
                         <p css={tw`text-lg`}>{database.name}</p>
                     </CopyOnClick>
                 </div>
-                <div css={tw`ml-8 text-center hidden md:block`}>
+                <div css={tw`hidden ml-8 text-center md:block`}>
                     <CopyOnClick text={database.connectionString}>
                         <p css={tw`text-sm`}>{database.connectionString}</p>
                     </CopyOnClick>
-                    <p css={tw`mt-1 text-2xs text-neutral-500 uppercase select-none`}>Endpoint</p>
+                    <p css={tw`mt-1 uppercase select-none text-2xs text-neutral-500`}>Endpoint</p>
                 </div>
-                <div css={tw`ml-8 text-center hidden md:block`}>
+                <div css={tw`hidden ml-8 text-center md:block`}>
                     <p css={tw`text-sm`}>{database.allowConnectionsFrom}</p>
-                    <p css={tw`mt-1 text-2xs text-neutral-500 uppercase select-none`}>Connections from</p>
+                    <p css={tw`mt-1 uppercase select-none text-2xs text-neutral-500`}>Connections from</p>
                 </div>
-                <div css={tw`ml-8 text-center hidden md:block`}>
+                <div css={tw`hidden ml-8 text-center md:block`}>
                     <CopyOnClick text={database.username}>
                         <p css={tw`text-sm`}>{database.username}</p>
                     </CopyOnClick>
-                    <p css={tw`mt-1 text-2xs text-neutral-500 uppercase select-none`}>Username</p>
+                    <p css={tw`mt-1 uppercase select-none text-2xs text-neutral-500`}>Username</p>
                 </div>
                 <div css={tw`ml-8`}>
                     <Button isSecondary css={tw`mr-2`} onClick={() => setConnectionVisible(true)}>

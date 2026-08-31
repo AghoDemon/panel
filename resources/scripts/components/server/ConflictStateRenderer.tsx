@@ -11,8 +11,7 @@ export default () => {
     const isNodeUnderMaintenance = ServerContext.useStoreState(
         (state) => state.server.data?.isNodeUnderMaintenance || false
     );
-
-    return status === 'installing' || status === 'install_failed' || status === 'reinstall_failed' ? (
+    return status === 'installing' || status === 'install_failed' ? (
         <ScreenBlock
             title={'Running Installer'}
             image={ServerInstallSvg}
@@ -36,7 +35,7 @@ export default () => {
             image={ServerRestoreSvg}
             message={
                 isTransferring
-                    ? 'Your server is being transferred to a new node, please check back later.'
+                    ? 'Your server is being transfered to a new node, please check back later.'
                     : 'Your server is currently being restored from a backup, please check back in a few minutes.'
             }
         />

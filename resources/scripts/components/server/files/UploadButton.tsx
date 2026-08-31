@@ -24,10 +24,8 @@ function isFileOrDirectory(event: DragEvent): boolean {
 
 export default ({ className }: WithClassname) => {
     const fileUploadInput = useRef<HTMLInputElement>(null);
-
     const visible = useSignal(false);
     const timeouts = useSignal<NodeJS.Timeout[]>([]);
-
     const { mutate } = useFileManagerSwr();
     const { addError, clearAndAddHttpError } = useFlashKey('files');
 
@@ -53,6 +51,7 @@ export default ({ className }: WithClassname) => {
 
     useEventListener('keydown', () => (visible.value = false));
 
+
     useEffect(() => {
         return () => timeouts.value.forEach(clearTimeout);
     }, []);
@@ -74,7 +73,6 @@ export default ({ className }: WithClassname) => {
                 name: file.name,
                 data: { abort: controller, loaded: 0, total: file.size },
             });
-
             return () =>
                 getFileUploadUrl(uuid).then((url) =>
                     axios

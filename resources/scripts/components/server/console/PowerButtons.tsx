@@ -4,6 +4,16 @@ import Can from '@/components/elements/Can';
 import { ServerContext } from '@/state/server';
 import { PowerAction } from '@/components/server/console/ServerConsoleContainer';
 import { Dialog } from '@/components/elements/dialog';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSkull } from '@fortawesome/free-solid-svg-icons';
+import tw from 'twin.macro';
+import styled from 'styled-components/macro';
+
+const PowerControlsDiv = styled.div`
+    & {
+        background-color:var(--secondary);
+    }
+`;
 
 interface PowerButtonProps {
     className?: string;
@@ -37,7 +47,7 @@ export default ({ className }: PowerButtonProps) => {
     }, [status]);
 
     return (
-        <div className={className}>
+        <PowerControlsDiv css={tw`shadow-md rounded p-3 flex text-xs mt-4 justify-center`} className={className}>
             <Dialog.Confirm
                 open={open}
                 hideCloseIcon
@@ -50,7 +60,6 @@ export default ({ className }: PowerButtonProps) => {
             </Dialog.Confirm>
             <Can action={'control.start'}>
                 <Button
-                    className={'flex-1'}
                     disabled={status !== 'offline'}
                     onClick={onButtonClick.bind(this, 'start')}
                 >
@@ -58,19 +67,26 @@ export default ({ className }: PowerButtonProps) => {
                 </Button>
             </Can>
             <Can action={'control.restart'}>
-                <Button.Text className={'flex-1'} disabled={!status} onClick={onButtonClick.bind(this, 'restart')}>
+                <Button.Text disabled={!status} onClick={onButtonClick.bind(this, 'restart')}>
                     Restart
                 </Button.Text>
             </Can>
             <Can action={'control.stop'}>
                 <Button.Danger
-                    className={'flex-1'}
                     disabled={status === 'offline'}
-                    onClick={onButtonClick.bind(this, killable ? 'kill' : 'stop')}
+                    onClick={onButtonClick.bind(this, 'stop')}
                 >
-                    {killable ? 'Kill' : 'Stop'}
+                    Stop
                 </Button.Danger>
             </Can>
-        </div>
+            <Can action={'control.stop'}>
+                <Button.Danger
+                    disabled={status === 'offline'}
+                    onClick={onButtonClick.bind(this, 'kill')}
+                >
+                    <FontAwesomeIcon icon={faSkull}/>
+                </Button.Danger>
+            </Can>
+        </PowerControlsDiv>
     );
 };

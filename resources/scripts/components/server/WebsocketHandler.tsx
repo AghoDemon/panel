@@ -34,9 +34,6 @@ export default () => {
 
         socket.on('auth success', () => setConnectionState(true));
         socket.on('SOCKET_CLOSE', () => setConnectionState(false));
-        socket.on('SOCKET_CONNECT_ERROR', () => {
-            setError('Failed to connect to websocket instance after multiple attempts: try refreshing the page.');
-        });
         socket.on('SOCKET_ERROR', () => {
             setError('connecting');
             setConnectionState(false);
